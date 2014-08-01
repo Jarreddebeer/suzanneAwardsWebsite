@@ -3,12 +3,11 @@ var express = require('express')
 
 var app = express();
 app.disable('x-forwarded-for');
-app.use(express.static(__dirname + 'public/'));
+app.use(express.static(__dirname + '/build'));
 
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
-
-app.get('/', routes.index);
+app.get('/', function(req, res) {
+    res.sendfile(__dirname + '/build/index.html');
+});
 
 app.listen(5000);
 
